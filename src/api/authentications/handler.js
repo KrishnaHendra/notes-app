@@ -21,7 +21,6 @@ class AuthenticationsHandler {
     );
 
     const accessToken = this._tokenManager.generateAccessToken({id});
-    console.log({accessToken});
     const refreshToken = this._tokenManager.generateRefreshToken({id});
 
     await this._authenticationsService.addRefreshToken(refreshToken);
