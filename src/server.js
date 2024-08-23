@@ -28,7 +28,8 @@ const ProducerService = require("./services/rabbitmq/ProducerService");
 const ExportsValidator = require("./validator/exports");
 // Uploads
 const uploads = require("./api/uploads");
-const StorageService = require("./services/storage/StorageService");
+const StorageService = require("./services/storage/StorageService"); // Kalau pakai lokal
+// const StorageService = require('./services/S3/StorageService'); // Kalau pakai amazon s3
 const UploadsValidator = require("./validator/uploads");
 
 const init = async () => {
@@ -39,10 +40,9 @@ const init = async () => {
   const storageService = new StorageService(
     path.resolve(__dirname, "api/uploads/file/images"),
   );
+  // const storageService = new StorageService(); // Kalau pakai amazon s3
 
   const server = Hapi.server({
-    // port: 3000,
-    // host: process.env.NODE_ENV !== "production" ? "localhost" : "0.0.0.0",
     port: process.env.PORT,
     host: process.env.HOST,
     routes: {
