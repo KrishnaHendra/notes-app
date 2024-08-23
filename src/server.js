@@ -31,10 +31,13 @@ const uploads = require("./api/uploads");
 const StorageService = require("./services/storage/StorageService"); // Kalau pakai lokal
 // const StorageService = require('./services/S3/StorageService'); // Kalau pakai amazon s3
 const UploadsValidator = require("./validator/uploads");
+// Cache
+const CacheService = require("./services/redis/CacheService");
 
 const init = async () => {
-  const collaborationsService = new CollaborationsService();
-  const notesService = new NotesService();
+  const cacheService = new CacheService();
+  const collaborationsService = new CollaborationsService(cacheService);
+  const notesService = new NotesService(collaborationsService, cacheService);
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
   const storageService = new StorageService(
