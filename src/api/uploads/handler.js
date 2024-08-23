@@ -16,6 +16,7 @@ class UploadsHandler {
       status: "success",
       data: {
         fileLocation: `http://${process.env.HOST}:${process.env.PORT}/upload/images/${filename}`,
+        // fileLocation: filename, // Kalau pakai amazon s3 ganti ini
       },
     });
     response.code(201);
